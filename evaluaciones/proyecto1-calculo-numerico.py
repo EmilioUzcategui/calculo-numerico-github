@@ -2,7 +2,6 @@ import flet as ft
 from flet import View,Page,AppBar,ElevatedButton,Text
 from flet import RouteChangeEvent,ViewPopEvent,CrossAxisAlignment,MainAxisAlignment
 import numpy as np
-
 from flet_core.control_event import ControlEvent
 
 '''
@@ -29,7 +28,366 @@ fila_actual2=0
 fila_actual3=0
 fila_actual4=0
 
-       
+#funcion que permite invertir los numeros que se convierten pasandolos como cadenas
+def invertir(cadena):
+    invertido=""
+    for i in range(len(cadena)-1,-1,-1):
+        invertido+=cadena[i]
+    return invertido
+
+#convertores de binario
+
+def binario_ternario(numero):
+    num=binario_decimal(numero)
+    return invertir(str(decimal_terciario(num)))
+
+def binario_cuaternario(numero):
+    num=binario_decimal(numero)
+    return invertir(str(decimal_cuaternario(num)))
+
+def binario_octal(numero):
+    num=binario_decimal(numero)
+    return invertir(str(decimal_octal(num)))
+
+def binario_hexadecimal(numero):
+    num=binario_decimal(numero)
+    return invertir(str(decimal_hexadecimal(num)))
+
+def binario_decimal(numero):
+    i=0
+    acum=0
+    lista=[]
+    lista2=[]
+    numerot=invertir(str(numero))
+    while(i<len(str(numero))):
+        lista.append(2**i) 
+        i+=1 
+    for i in numerot:
+        lista2.append(int(i))
+    for i in range(0,len(lista)):
+        acum+=lista[i]*lista2[i]
+    return acum
+
+#convertores de ternario
+
+def ternario_decimal(numero):
+    i=0
+    acum=0
+    lista=[]
+    lista2=[]
+    numerot=invertir(str(numero))
+    while(i<len(str(numero))):
+        lista.append(3**i)
+        i+=1  
+    for i in numerot:
+        lista2.append(int(i))
+    for i in range(0,len(lista)):
+        acum+=lista[i]*lista2[i]
+    return acum
+
+def ternario_binario(numero):
+    num=ternario_decimal(numero)
+    return invertir(str(decimal_binario(num)))
+
+def ternario_cuaternario(numero):
+    num=ternario_decimal(numero)
+    return invertir(str(decimal_cuaternario(num)))
+
+def ternario_octal(numero):
+    num=ternario_decimal(numero)
+    return invertir(str(decimal_octal(num)))
+
+def ternario_hexadecimal(numero):
+    num=ternario_decimal(numero)
+    return invertir(str(decimal_hexadecimal(num)))
+
+#convertores de cuaternario
+
+def cuaternario_decimal(numero):
+    i=0
+    acum=0
+    lista=[]
+    lista2=[]
+    numerot=invertir(str(numero))
+    while(i<len(str(numero))):
+        lista.append(4**i) 
+        i+=1 
+    for i in numerot:
+        lista2.append(int(i))
+    for i in range(0,len(lista)):
+        acum+=lista[i]*lista2[i]
+    return acum
+
+def cuaternario_binario(numero):
+    num=cuaternario_decimal(numero)
+    return invertir(str(decimal_binario(num)))
+
+def cuaternario_ternario(numero):
+    num=cuaternario_decimal(numero)
+    return invertir(str(decimal_terciario(num)))
+
+def cuaternario_octal(numero):
+    num=cuaternario_decimal(numero)
+    return invertir(str(decimal_octal(num)))
+
+def cuaternario_hexadecimal(numero):
+    num=cuaternario_decimal(numero)
+    return invertir(str(decimal_hexadecimal(num)))
+
+#convertores de octal
+
+def octal_decimal(numero):
+    i=0
+    acum=0
+    lista=[]
+    lista2=[]
+    numerot=invertir(str(numero))
+    while(i<len(str(numero))):
+        lista.append(8**i) 
+        i+=1 
+    for i in numerot:
+        lista2.append(int(i))
+    for i in range(0,len(lista)):
+        acum+=lista[i]*lista2[i]
+    return acum
+
+def octal_binario(numero):
+    num=octal_decimal(numero)
+    return invertir(str(decimal_binario(num)))
+
+def octal_ternario(numero):
+    num=octal_decimal(numero)
+    return invertir(str(decimal_terciario(num)))
+
+def octal_cuaternario(numero):
+    num=octal_decimal(numero)
+    return invertir(str(decimal_cuaternario(num)))
+
+def octal_hexadecimal(numero):
+    num=octal_decimal(numero)
+    return invertir(str(decimal_hexadecimal(num)))
+
+#convertores de hexadecimal
+
+def hexadecimal_decimal(numero):
+    i=0
+    acum=0
+    lista=[]
+    lista2=[]
+    numerot=invertir(str(numero))
+    while(i<len(str(numero))):
+        lista.append(16**i) 
+        i+=1 
+    for i in numerot:
+        if i=="A":
+            lista2.append(10)
+        elif i=="B":
+            lista2.append(11)
+        elif i=="C":
+            lista2.append(12)
+        elif i=="D":
+            lista2.append(13)
+        elif i=="E":
+            lista2.append(14)
+        elif i=="F":
+            lista2.append(15)
+        else:
+            lista2.append(int(i))
+    for i in range(0,len(lista)):
+        acum+=lista[i]*lista2[i]
+    return acum  
+
+def hexadecimal_binario(numero):
+    num=hexadecimal_decimal(numero)
+    return invertir(str(decimal_binario(num)))
+
+def hexadecimal_ternario(numero):
+    num=hexadecimal_decimal(numero)
+    return invertir(str(decimal_terciario(num)))
+
+def hexadecimal_cuaternario(numero):
+    num=hexadecimal_decimal(numero)
+    return invertir(str(decimal_cuaternario(num)))
+
+def hexadecimal_octal(numero):
+    num=hexadecimal_decimal(numero)
+    return invertir(str(decimal_octal(num)))
+ 
+#convertores de decimal
+
+def decimal_binario(numero):
+    resto=0
+    bin=""
+    while numero>0:
+        resto = numero%2
+        numero=numero//2
+        bin+=str(resto)
+    return bin
+     
+
+def decimal_octal(numero):
+    resto = 0
+    octal=""
+    while numero>0:
+        resto = numero%8
+        numero=numero//8
+        octal+=str(resto)
+    return octal
+
+def decimal_cuaternario(numero):
+    resto = 0
+    cuat=""
+    while numero>0:
+        resto = numero%4
+        numero=numero//4
+        cuat+=str(resto)
+    return cuat
+
+def decimal_hexadecimal(numero):
+    resto=0
+    hexa=""
+    while numero>0:
+        resto = numero%16
+        if resto==10:
+            hexa+="A"
+            numero=numero//16
+        elif resto==11:
+            hexa+="B"
+            numero=numero//16
+        elif resto==12:
+            hexa+="C"
+            numero=numero//16
+
+        elif resto==13:
+            hexa+="D"
+            numero=numero//16
+        elif resto==14:
+            hexa+="E"
+            numero=numero//16
+        elif resto==15:
+            hexa+="F"
+            numero=numero//16
+        else:
+            hexa+=str(resto)
+            numero=numero//16
+    return hexa
+
+def decimal_terciario(numero):
+    resto=0
+    terc=""
+    while numero>0:
+        resto = numero%3
+        numero=numero//3
+        terc+=str(resto)
+    return terc
+print(ternario_decimal(1021))
+
+#validaciones de numeros
+
+#validacion decimal
+
+def validar_decimal(numero):
+    if str(numero)=="":
+        return False
+    for i in numero:
+        if numero.isnumeric()==False:
+            return False
+        else:
+            return True
+
+#validacion de binario
+
+def validar_binario(numero):
+    if str(numero)=="":
+        return False
+    cont=0
+    for i in numero:
+        if numero.isnumeric()==False:
+            return False
+        elif int(i)>1 or int(i)<0:
+            cont+=1
+    if cont!=0:
+        return False
+    else:
+        return True
+    
+#validacion de ternario
+
+def validar_ternario(numero):
+    if str(numero)=="":
+        return False
+    cont=0
+    for i in numero:
+        if numero.isnumeric()==False:
+            return False
+        elif int(i)>2 or int(i)<0:
+            cont+=1
+    if cont!=0:
+        return False
+    else:
+        return True
+
+#validacion de cuaternario
+
+def validar_cuaternario(numero):
+    if str(numero)=="":
+        return False
+    cont=0
+    for i in numero:
+        if numero.isnumeric()==False:
+            return False
+        elif int(i)>3 or int(i)<0:
+            cont+=1
+    if cont!=0:
+        return False
+    else:
+        return True
+
+#validacion de octal
+
+def validar_octal(numero):
+    if str(numero)=="":
+        return False
+    cont=0
+    for i in numero:
+        if numero.isnumeric()==False:
+            return False
+        elif int(i)>7 or int(i)<0:
+            cont+=1
+    if cont!=0:
+        return False
+    else:
+        return True
+
+#validar hexadecimal
+
+def validar_hexadecimal(numero):
+    cont=0
+    conte=0
+    if str(numero)=="":
+        return False
+    for i in numero:
+        print(i)
+        if i=="A":
+            cont+=1
+        elif i=="B":
+            cont+=1
+        elif i=="C":
+            cont+=1
+        elif i=="D":
+            cont+=1
+        elif i=="E":
+            cont+=1
+        elif i=="F":
+            cont+=1
+        else:
+            if i.isnumeric()==False:
+                return False
+            else:
+                cont+=1
+        
+    if cont!=0:
+        return True       
     
 
 #pagina principal
@@ -43,8 +401,226 @@ def main(page:ft.Page):
     #funcion que permite cambiar las distintas vistas de la pagina
     def cambiar_pagina(e: RouteChangeEvent):
         #funcion que imprime en el campo de texto los numeros convertidos
-        
-            
+        def evento_convertir(e):
+            if str(lista_convertir)!=str(str(lista_convertidos)):
+                if str(lista_convertir.value)=="de binario" and str(lista_convertidos.value)=="a ternario":
+                    if validar_binario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(binario_ternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+
+                elif str(lista_convertir.value)=="de binario" and str(lista_convertidos.value)=="a cuaternario":
+                    if validar_binario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(binario_cuaternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de binario" and str(lista_convertidos.value)=="a octal":
+                    if validar_binario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(binario_octal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de binario" and str(lista_convertidos.value)=="a decimal":
+                    if validar_binario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(binario_decimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de binario" and str(lista_convertidos.value)=="a hexadecimal":
+                    if validar_binario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(binario_hexadecimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de ternario" and str(lista_convertidos.value)=="a binario":
+                    if validar_ternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(ternario_binario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de ternario" and str(lista_convertidos.value)=="a cuaternario":
+                    if validar_ternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(ternario_cuaternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de ternario" and str(lista_convertidos.value)=="a octal":
+                    if validar_ternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(ternario_octal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de ternario" and str(lista_convertidos.value)=="a decimal":
+                    if validar_ternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(ternario_decimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de ternario" and str(lista_convertidos.value)=="a hexadecimal":
+                    if validar_ternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(ternario_hexadecimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de cuaternario" and str(lista_convertidos.value)=="a binario":
+                    if validar_cuaternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(cuaternario_binario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de cuaternario" and str(lista_convertidos.value)=="a ternario":
+                    if validar_cuaternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(cuaternario_ternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de cuaternario" and str(lista_convertidos.value)=="a octal":
+                    if validar_cuaternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(cuaternario_octal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de cuaternario" and str(lista_convertidos.value)=="a decimal":
+                    if validar_cuaternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(cuaternario_decimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de cuaternario" and str(lista_convertidos.value)=="a hexadecimal":
+                    if validar_cuaternario(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(cuaternario_hexadecimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de octal" and str(lista_convertidos.value)=="a binario":
+                    if validar_octal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(octal_binario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de octal" and str(lista_convertidos.value)=="a ternario":
+                    if validar_octal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(octal_ternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de octal" and str(lista_convertidos.value)=="a cuaternario":
+                    if validar_octal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(octal_cuaternario(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de octal" and str(lista_convertidos.value)=="a decimal":
+                    if validar_octal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(octal_decimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de octal" and str(lista_convertidos.value)=="a hexadecimal":
+                    if validar_octal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str(octal_hexadecimal(int(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de decimal" and str(lista_convertidos.value)=="a binario":
+                    if validar_decimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=invertir((decimal_binario(int(campo_texto_ingresar.value))))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de decimal" and str(lista_convertidos.value)=="a ternario":
+                    if validar_decimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=invertir((decimal_terciario(int(campo_texto_ingresar.value))))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de decimal" and str(lista_convertidos.value)=="a cuaternario":
+                    if validar_decimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=invertir((decimal_cuaternario(int(campo_texto_ingresar.value))))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de decimal" and str(lista_convertidos.value)=="a octal":
+                    if validar_decimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=invertir((decimal_octal(int(campo_texto_ingresar.value))))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de decimal" and str(lista_convertidos.value)=="a hexadecimal":
+                    if validar_decimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=invertir((decimal_hexadecimal(int(campo_texto_ingresar.value))))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de hexadecimal" and str(lista_convertidos.value)=="a binario":
+                    if validar_hexadecimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str((hexadecimal_binario(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de hexadecimal" and str(lista_convertidos.value)=="a ternario":
+                    if validar_hexadecimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str((hexadecimal_ternario(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de hexadecimal" and str(lista_convertidos.value)=="a cuaternario":
+                    if validar_hexadecimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str((hexadecimal_cuaternario(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de hexadecimal" and str(lista_convertidos.value)=="a octal":
+                    if validar_hexadecimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str((hexadecimal_octal(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                elif str(lista_convertir.value)=="de hexadecimal" and str(lista_convertidos.value)=="a decimal":
+                    if validar_hexadecimal(str(campo_texto_ingresar.value))==True:
+                        campo_texto_resultados.value=str((hexadecimal_decimal(campo_texto_ingresar.value)))
+                        page.update()
+                    else:
+                        campo_texto_resultados.value="error"
+                        page.update()
+                else:
+                    campo_texto_resultados.value="error"
+                    page.update()
+
+            else:
+                campo_texto_resultados.value="error"
+                page.update()
                     
         #funcion que controla cuando el modo es automatico o manual. si es automatico se desactiva el campo de texto y 
         #el boton ingresar, de lo contrario se activan los controles anteriores        
